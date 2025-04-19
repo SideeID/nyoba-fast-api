@@ -1,11 +1,23 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
-@app.get("/")
-async def read_root():
-    return {"Hello": "World from Anjay Mabar"}
+class InformasiTambahan(BaseModel):
+    hobi: str = "Membaca Buku"
+    cita_cita: str = "Menjadi Software Engineer"
+    makanan_favorit: str = "Nasi Goreng"
 
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+class DataDiri(BaseModel):
+    nama: str = "Dimas"
+    kuliah: str = "Politeknik Negeri Jember"
+    informasi_lain: InformasiTambahan
+
+@app.get("/data-diri")
+async def get_data_diri():
+    data = DataDiri(
+        nama="Dimas",
+        kuliah="Politeknik Negeri Jember",
+        informasi_lain=InformasiTambahan()
+    )
+    return data
