@@ -1,14 +1,9 @@
 {
-  "version": 2,
+  "devCommand": "uvicorn main:app --host 0.0.0.0 --port 3000",
   "builds": [
     {
       "src": "main.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.12",
-        "buildCommand": "python3 -m venv .venv && source .venv/bin/activate && pip install --no-cache-dir -r requirements.txt"
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
